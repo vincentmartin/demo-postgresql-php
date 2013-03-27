@@ -87,7 +87,7 @@ INSERT INTO COURSE_STUDENT VALUES('I51', 'kevin.durant@univ-tln.fr');
 -- Views & Functions.
 -------------------------------------------------------
 CREATE VIEW COURSE_DETAILS AS 
-	SELECT COURSE.code AS COURSE_code, PERSON.first_name AS teacher_first_name, PERSON.last_name as teacher_last_name, PERSON.email AS teacher_email 
+	SELECT COURSE.code AS COURSE_code, COURSE.name as COURSE_name, PERSON.first_name AS teacher_first_name, PERSON.last_name as teacher_last_name, PERSON.email AS teacher_email 
 	FROM COURSE_TEACHER JOIN COURSE ON COURSE.code = COURSE_TEACHER.code  JOIN PERSON ON COURSE_TEACHER.teacher = PERSON.email;
 
 CREATE OR REPLACE FUNCTION curr_roles() RETURNS SETOF TEXT
@@ -112,6 +112,33 @@ GRANT SELECT,INSERT,DELETE,UPDATE ON TABLE COURSE_STUDENT TO students;
 GRANT SELECT ON TABLE COURSE TO students;
 GRANT SELECT ON TABLE COURSE_TEACHER TO students;
 -- Only teachers have an acces to the view.
-GRANT SELECT ON TABLE COURSE_DETAILS TO teachers;
+GRANT SELECT ON VIEW COURSE_DETAILS TO teachers;
+
+CREATE OR REPLACE FUNCTION COURSE_DETAILS_UPDATE()
+RETURNS TRIGGER
+LANGUAGE plpgsql
+AS $function$
+   BEGIN
+      IF TG_OP = 'INSERT' THEN
+        INSERT INTO  COURSE VALUES(NEW.COURSE_code,NEW.COURSE_name);
+        INSERT INTO  PERSON VALUES(NEW.teacher_email,NEW.teacher_first_name, NEW.teacher_last_name);
+        RETURN NEW;
+      ELSIF TG_OP = 'UPDATE' THEN
+	UPDATE   COURSE SET code = NEW.COURSE_code, name= NEW.COURSE_name WHERE code = OLD.COURSE_code;
+       UPDATE PERSON SET email=NEW.PERSON_email,first_name= NEW.teacher_first_name, last_name = NEW.teacher_last_name WHERE email=OLD.teacher_email;
+       RETURN NEW;
+      ELSIF TG_OP = 'DELETE' THEN
+       DELETE FROM COURSE WHERE code=OLD.COURSE_code;
+       DELETE FROM PERSON WHERE email=OLD.teacher_email;
+       RETURN NULL;
+      END IF;
+      RETURN NEW;
+    END;
+$function$;
+
+CREATE TRIGGER COURSE_DETAILS_TRIGGER
+    INSTEAD OF INSERT OR UPDATE OR DELETE ON
+      COURSE_DETAILS_TRIGGER FOR EACH ROW EXECUTE PROCEDURE COURSE_DETAILS_UPDATE();
+
 
 -- Exercices : connectez-vous avec les trois utilisateurs et constater par vous-même les droits de chacun.
