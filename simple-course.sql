@@ -138,7 +138,6 @@ $function$;
 
 CREATE TRIGGER COURSE_DETAILS_TRIGGER
     INSTEAD OF INSERT OR UPDATE OR DELETE ON
-      COURSE_DETAILS_TRIGGER FOR EACH ROW EXECUTE PROCEDURE COURSE_DETAILS_UPDATE();
-
+      COURSE_DETAILS FOR EACH ROW EXECUTE PROCEDURE COURSE_DETAILS_UPDATE();
 
 -- Exercices : connectez-vous avec les trois utilisateurs et constater par vous-même les droits de chacun.
