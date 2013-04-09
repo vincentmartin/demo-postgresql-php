@@ -12,9 +12,9 @@ DROP VIEW IF EXISTS  COURSE_DETAILS CASCADE;
 
 DROP ROLE IF EXISTS teachers;
 DROP ROLE IF EXISTS students;
-DROP ROLE IF EXISTS "jean.dupont@univ-tln.fr";
-DROP ROLE IF EXISTS "kevin.durant@univ-tln.fr";
-DROP ROLE IF EXISTS "justine.clavier@univ-tln.fr";
+DROP ROLE IF EXISTS "jean.dupont";
+DROP ROLE IF EXISTS "kevin.durant";
+DROP ROLE IF EXISTS "justine.clavier";
 
 
 -----------------------------------------------------------------------------
@@ -26,7 +26,7 @@ CREATE TABLE PERSON (
 email VARCHAR(100) NOT NULL,
 first_name VARCHAR(100)  NOT NULL,
 last_name VARCHAR(100) NOT NULL,
-CONSTRAINT email CHECK (((email)::text ~* '^[0-9a-zA-Z._-]+@[0-9a-zA-Z._-]{2,}[.][a-zA-Z]{2,4}$'::text)),
+CONSTRAINT email_chk CHECK (((email)::text ~* '^[0-9a-zA-Z._-]+@[0-9a-zA-Z._-]{2,}[.][a-zA-Z]{2,4}$'::text)),
 PRIMARY KEY (email)
 );
 
@@ -34,6 +34,7 @@ CREATE TABLE COURSE (
 code VARCHAR(10) NOT NULL,
 name VARCHAR(100) NOT NULL,
 description VARCHAR(1000),
+CONSTRAINT code_chk CHECK (LENGTH(code) > 2),
 PRIMARY KEY (code)
 );
 
@@ -57,30 +58,30 @@ PRIMARY KEY(code, student)
 CREATE ROLE teachers;
 CREATE ROLE students;
 
-CREATE ROLE "jean.dupont@univ-tln.fr" LOGIN IN GROUP teachers;
-	ALTER ROLE "jean.dupont@univ-tln.fr" ENCRYPTED PASSWORD 'tch';
-CREATE ROLE "kevin.durant@univ-tln.fr" LOGIN IN GROUP students;
-	ALTER ROLE "kevin.durant@univ-tln.fr" ENCRYPTED PASSWORD 'std';
+CREATE ROLE "jean.dupont" LOGIN IN GROUP teachers;
+	ALTER ROLE "jean.dupont" ENCRYPTED PASSWORD 'tch';
+CREATE ROLE "kevin.durant" LOGIN IN GROUP students;
+	ALTER ROLE "kevin.durant" ENCRYPTED PASSWORD 'std';
 -- DOCTORANT = students + teachers
-CREATE ROLE "justine.clavier@univ-tln.fr" LOGIN IN GROUP students, teachers;
-	ALTER ROLE "justine.clavier@univ-tln.fr" ENCRYPTED PASSWORD 'std';
+CREATE ROLE "justine.clavier" LOGIN IN GROUP students, teachers;
+	ALTER ROLE "justine.clavier" ENCRYPTED PASSWORD 'std';
 
 
 -----------------------------------------------------------------------------
 -- Insert some data.
 -----------------------------------------------------------------------------
 
-INSERT INTO PERSON VALUES ('jean.dupont@univ-tln.fr', 'Jean', 'Dupont');
-INSERT INTO PERSON VALUES ('kevin.durant@univ-tln.fr', 'Kevin', 'Durant');
+INSERT INTO PERSON VALUES ('jean.dupont', 'Jean', 'Dupont');
+INSERT INTO PERSON VALUES ('kevin.durant', 'Kevin', 'Durant');
 
 INSERT INTO COURSE VALUES ('I51', 'Systèmes et Réseaux', NULL);
 INSERT INTO COURSE VALUES ('I63', 'BDD', 'Bases de données');
 
-INSERT INTO COURSE_TEACHER VALUES ('I51', 'jean.dupont@univ-tln.fr');
-INSERT INTO COURSE_TEACHER VALUES('I63', 'jean.dupont@univ-tln.fr');
+INSERT INTO COURSE_TEACHER VALUES ('I51', 'jean.dupont');
+INSERT INTO COURSE_TEACHER VALUES('I63', 'jean.dupont');
 
-INSERT INTO COURSE_STUDENT VALUES('I63', 'kevin.durant@univ-tln.fr');
-INSERT INTO COURSE_STUDENT VALUES('I51', 'kevin.durant@univ-tln.fr');
+INSERT INTO COURSE_STUDENT VALUES('I63', 'kevin.durant');
+INSERT INTO COURSE_STUDENT VALUES('I51', 'kevin.durant');
 
 
 -----------------------------------------------------------------------------
@@ -136,8 +137,8 @@ AS $function$
     END;
 $function$;
 
-CREATE TRIGGER COURSE_DETAILS_TRIGGER
-    INSTEAD OF INSERT OR UPDATE OR DELETE ON
-      COURSE_DETAILS FOR EACH ROW EXECUTE PROCEDURE COURSE_DETAILS_UPDATE();
+--CREATE TRIGGER COURSE_DETAILS_TRIGGER
+--   INSTEAD OF INSERT OR UPDATE OR DELETE ON
+--      COURSE_DETAILS FOR EACH ROW EXECUTE PROCEDURE COURSE_DETAILS_UPDATE();
 
 -- Exercices : connectez-vous avec les trois utilisateurs et constater par vous-même les droits de chacun.
