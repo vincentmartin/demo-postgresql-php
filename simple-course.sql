@@ -1,5 +1,5 @@
 -----------------	BDD - Illustrative examples	 	-----------------
------------------	version 26 mars 2013			-----------------
+-----------------	version 31 mars 2013			-----------------
 
 -----------------------------------------------------------------------------
 -- Clear previous information.
@@ -113,7 +113,8 @@ GRANT SELECT,INSERT,DELETE,UPDATE ON TABLE COURSE_STUDENT TO students;
 GRANT SELECT ON TABLE COURSE TO students;
 GRANT SELECT ON TABLE COURSE_TEACHER TO students;
 -- Only teachers have an acces to the view.
-GRANT SELECT ON VIEW COURSE_DETAILS TO teachers;
+GRANT SELECT ON COURSE_DETAILS TO teachers; -- 9.X+
+-- GRANT SELECT ON VIEW COURSE_DETAILS TO teachers;  -- 8.X
 
 CREATE OR REPLACE FUNCTION COURSE_DETAILS_UPDATE()
 RETURNS TRIGGER
