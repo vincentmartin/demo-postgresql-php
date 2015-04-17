@@ -46,7 +46,7 @@ $request->closeCursor(); // ne pas oublier de fermer le curseur.
 </tbody>
 </table>
 
-<!-- Toutes les données du formulaires seront envoyées à la page 'insertCourse.php' avec la méthode POST. -->
+<!-- Toutes les données du formulaire seront envoyées à la page 'insertCourse.php' avec la méthode POST. -->
 <form method="post" action="insertCourse.php">
 	<table><caption>Ajout d'un cours</caption>
 		<tr><td>Code : </td><td><input type="text" name="code" /></td></tr> </br>

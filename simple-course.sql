@@ -1,5 +1,5 @@
 -----------------	BDD - Illustrative examples	 	-----------------
------------------	version 31 mars 2013			-----------------
+----------- version 31 mars 2013, mise à jour le 09 février 2015 ----------------
 
 -----------------------------------------------------------------------------
 -- Clear previous information.
@@ -71,17 +71,17 @@ CREATE ROLE "justine.clavier" LOGIN IN GROUP students, teachers;
 -- Insert some data.
 -----------------------------------------------------------------------------
 
-INSERT INTO PERSON VALUES ('jean.dupont', 'Jean', 'Dupont');
-INSERT INTO PERSON VALUES ('kevin.durant', 'Kevin', 'Durant');
+INSERT INTO PERSON VALUES ('jean.dupont@example.com', 'Jean', 'Dupont');
+INSERT INTO PERSON VALUES ('kevin.durant@example.com', 'Kevin', 'Durant');
 
 INSERT INTO COURSE VALUES ('I51', 'Systèmes et Réseaux', NULL);
 INSERT INTO COURSE VALUES ('I63', 'BDD', 'Bases de données');
 
-INSERT INTO COURSE_TEACHER VALUES ('I51', 'jean.dupont');
-INSERT INTO COURSE_TEACHER VALUES('I63', 'jean.dupont');
+INSERT INTO COURSE_TEACHER VALUES ('I51', 'jean.dupont@example.com');
+INSERT INTO COURSE_TEACHER VALUES('I63', 'jean.dupont@example.com');
 
-INSERT INTO COURSE_STUDENT VALUES('I63', 'kevin.durant');
-INSERT INTO COURSE_STUDENT VALUES('I51', 'kevin.durant');
+INSERT INTO COURSE_STUDENT VALUES('I63', 'kevin.durant@example.com');
+INSERT INTO COURSE_STUDENT VALUES('I51', 'kevin.durant@example.com');
 
 
 -----------------------------------------------------------------------------
