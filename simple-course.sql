@@ -45,7 +45,7 @@ PRIMARY KEY(code, teacher)
 );
 
 CREATE TABLE COURSE_STUDENT(
-code VARCHAR(100) REFERENCES COURSE (code), 
+code VARCHAR(100) REFERENCES COURSE (code),
 student VARCHAR(100) REFERENCES PERSON(email),
 PRIMARY KEY(code, student)
 );
@@ -87,8 +87,8 @@ INSERT INTO COURSE_STUDENT VALUES('I51', 'kevin.durant@example.com');
 -----------------------------------------------------------------------------
 -- Views & Functions.
 -------------------------------------------------------
-CREATE VIEW COURSE_DETAILS AS 
-	SELECT COURSE.code AS COURSE_code, COURSE.name as COURSE_name, PERSON.first_name AS teacher_first_name, PERSON.last_name as teacher_last_name, PERSON.email AS teacher_email 
+CREATE VIEW COURSE_DETAILS AS
+	SELECT COURSE.code AS COURSE_code, COURSE.name as COURSE_name, PERSON.first_name AS teacher_first_name, PERSON.last_name as teacher_last_name, PERSON.email AS teacher_email
 	FROM COURSE_TEACHER JOIN COURSE ON COURSE.code = COURSE_TEACHER.code  JOIN PERSON ON COURSE_TEACHER.teacher = PERSON.email;
 
 CREATE OR REPLACE FUNCTION curr_roles() RETURNS SETOF TEXT

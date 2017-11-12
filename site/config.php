@@ -4,11 +4,11 @@ class DB
 	private static $instance = null;
 	///////////// >> VOS PARAMÈTRES ICI  << ///////////////////////////////////
 	// Paramètres de connexion à la base de données
-	private static $dbhost = "HOST"; // adresse du serveur : 'localhost' si la base est sur la même machine que les pages PHP
+	private static $dbhost = "localhost"; // adresse du serveur : 'localhost' si la base est sur la même machine que les pages PHP
 	private static $dbport = 5432; // port du serveur
-	private static $dbuname = "LOGIN"; // votre login
-	private static $dbpass = "PASSWORD"; // votre mot de passe
-	private static $dbname = "BD"; // nom de la base de données
+	private static $dbuname = "postgres"; // votre login
+	private static $dbpass = "changeme"; // votre mot de passe
+	private static $dbname = "simple-course"; // nom de la base de données
 	////////////////////////////////////////////////////////////////////////////
 	public static function get()
 	{
