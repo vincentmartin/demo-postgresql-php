@@ -13,3 +13,4 @@ docker-compose up
 ```
 
 L'application est accessible à l'adresse [http://localhost:8080](http://localhost:8080). La base de données est accessible sur le port **5432** et l'interface graphique d'administration [phpPgAdmin](http://phppgadmin.sourceforge.net/doku.php) est accesible à l'adresse [http://localhost:8081](http://localhost:8081)
+
