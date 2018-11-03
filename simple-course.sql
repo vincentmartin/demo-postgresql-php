@@ -20,7 +20,7 @@ DROP ROLE IF EXISTS "justine.clavier";
 -----------------------------------------------------------------------------
 -- Initialize the structure.
 -----------------------------------------------------------------------------
-CREATE PROCEDURAL LANGUAGE plpgsql;
+CREATE OR REPLACE PROCEDURAL LANGUAGE plpgsql;
 
 CREATE TABLE PERSON (
 email VARCHAR(100) NOT NULL,
