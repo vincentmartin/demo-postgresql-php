@@ -1,0 +1,37 @@
+version: '3'
+
+services:
+    app:
+        build: .
+        ports:
+            - 8080:80
+        volumes:
+            - ./site:/var/www/html
+        links:
+            - db:postgres
+
+    db:
+        image: postgres:9
+        volumes:
+            - ./docker/postgres/logs:/var/log/postgresql
+            - ./simple-course.sql:/docker-entrypoint-initdb.d/simple-course.sql
+        ports:
+            - 5432:5432
+        environment:
+            - POSTGRES_PASSWORD=changeme
+            - POSTGRES_USER=postgres
+            - POSTGRES_DB=simple-course
+
+            
+    phppgadmin:
+        image: dockage/phppgadmin
+        ports:
+            - 8081:80
+        environment:
+            - PHP_PG_ADMIN_SERVER_DESC=PostgreSQL
+            - PHP_PG_ADMIN_SERVER_HOST=db
+            - PHP_PG_ADMIN_SERVER_PORT=5432
+            - PHP_PG_ADMIN_SERVER_SSL_MODE=allow
+
+        links:
+            - db:postgres
