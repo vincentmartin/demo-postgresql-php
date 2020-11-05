@@ -2,7 +2,7 @@ version: '3'
 
 services:
     app:
-        build: .
+        build: ./docker/apache
         ports:
             - 8080:80
         volumes:
@@ -13,8 +13,8 @@ services:
     db:
         image: postgres:12.0 # set version to 9 if you encounter problems.
         volumes:
-            - ./docker/postgres/logs:/var/log/postgresql
-            - ./docker/postgres/datas:/var/lib/postgresql/data
+            - ./docker/data/postgres/logs:/var/log/postgresql
+            - ./docker/data/postgres/data:/var/lib/postgresql/data
             - ./simple-course.sql:/docker-entrypoint-initdb.d/simple-course.sql
         ports:
             - 5432:5432
