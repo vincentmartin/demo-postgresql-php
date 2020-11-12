@@ -16,5 +16,5 @@ L'application est accessible à l'adresse [http://localhost:8080](http://localho
 
 La base de données est accessible sur le port **5432** (login : **postgres**, mot de passe : **changeme**).
 
-L'interface graphique d'administration de la base de données [pgadmin4](https://www.pgadmin.org/) est accesible à l'adresse [http://localhost:8081](http://localhost:8081) (login : **postgres**, mot de passe : **changeme**). À la première connexion, déclarer un nouveau serveur (Add New Server) en précisant son nom (eg. local), son l'hôte (db), l'identifiant (postgres) et le mot de passe (changeme).
+L'interface graphique d'administration de la base de données [pgadmin4](https://www.pgadmin.org/) est accesible à l'adresse [http://localhost:8081](http://localhost:8081) (login : **postgres@local.int**, mot de passe : **changeme**). À la première connexion, déclarer un nouveau serveur (Add New Server) en précisant son nom (eg. local), son l'hôte (db), l'identifiant (postgres) et le mot de passe (changeme).
 
