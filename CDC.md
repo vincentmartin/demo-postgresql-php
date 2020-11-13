@@ -28,7 +28,7 @@ Des quelques problématiques décrites ci-dessus, on peut en déduire les besoin
 
 Pour répondre à ce besoin, notre société a la solution ! Fort de 50 ans d'expérience dans les bases de données, nous savons précisément quelles solutions mettre en place pour transformer votre Université en une véritable machine digitale.
 
-### Solutions fonctionnels
+### Solutions fonctionnelles
 
 Voici les fonctionnalités qui seront offertes par l'application :
 * Un système de gestion d'inscriptions dôté d'une intelligence capable de vérifier chacune des informations entrée et de vous proposer des solutions ;
