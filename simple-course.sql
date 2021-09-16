@@ -1,5 +1,9 @@
------------------	BDD - Illustrative examples	 	-----------------
------------ version 31 mars 2013, mise à jour le 09 février 2015 ----------------
+-----------------	BDD - Gestion de cours	 	-----------------
+
+--------------------------------------------------------------------------
+-- Les exemples ci-dessous sont exécutés automatiquement au lancement de docker-compose.
+-- Vous pouvez exécuter les blocs un par un pour comprendre chacun d'entre eux.
+-----------------------------------------------------------------------------
 
 -----------------------------------------------------------------------------
 -- Clear previous information.
