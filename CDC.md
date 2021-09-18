@@ -1,5 +1,9 @@
 # Cahier des charges
 
+## Titre 
+
+"Réalisation d'une application Web pour la gestion des enseignements et des emplois du temps pour l'Université Pierre-Marie."
+
 ## Contexte (ou Introduction)
 
 L'Université Pierre-Marie de Saint-Martin-la-Plaine a été créée en janvier de l'an 1890. Aujourd'hui, elle compte un peu plus de 500 étudiants et 28 enseignants. L'Université a vu ses effectifs augmenter de 70% ces 10 dernières années et les membres du personnel administratif rencontrent de nombreuses difficultés dans l'organisation des cours et des emplois du temps.
@@ -24,6 +28,18 @@ Des quelques problématiques décrites ci-dessus, on peut en déduire les besoin
 * Lors des quadriennals durant lequel les programmes sont refondus, pouvoir définir selon un formalisme durable dans le temps, la description des différents enseignements ;
 * Pouvoir facilement créer un emploi du temps et accélérer les modifications tout en évitant les conflits.
 
+**Contraintes particulières**
+* La solution devra pouvoir fonctionner dans un environnement GNU/LINUX.
+* La solution devra être accessible depuis une interface Web.
+
+## Livrables
+
+2 livrables sont attendus :
+* La solution _packagée_ dans des conteneurs type Docker
+* La documentation contenant les précédures d'installation et de déploiement, le guide utilisateur et le guide administrateur.
+
+# Réponse au besoin
+
 ## Solutions
 
 Pour répondre à ce besoin, notre société a la solution ! Fort de 50 ans d'expérience dans les bases de données, nous savons précisément quelles solutions mettre en place pour transformer votre Université en une véritable machine digitale.
@@ -46,9 +62,11 @@ D'un point de vue technique, nous proposons d'intégrer des technologies éprouv
 
 # Livrables
 
-L'Université Pierre-Marie ne diposant d'aucun système Informatique, nous proposerons une machine "clefs en main" avec l'ensemble des composants déjà installés.
+Le livrable est un environnement _Docker_ contenant l'ensemble des services, base de données et IHMs. Le livrable pourra s'installer sur une machine GNU/Linux avec _Docker_ et _docker-compose_ installés.
 
-Lors des mises à jours, l'administrateur du système devra suivre la procédure suivante :
+Le fichier [README](./README.md) décrit la procédure d'installation de l'application. 
+
+Les mises à jour se font en téléchargeant la dernière version de l'application sur _github_. Lors des mises à jours, l'administrateur du système devra suivre la procédure suivante :
 - Stopper les services 
 ```
 docker-compose down
