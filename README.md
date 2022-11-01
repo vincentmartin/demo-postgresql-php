@@ -7,7 +7,10 @@ Introduction
 Ce projet illustre la création d'une base de données sous PostgreSQL en mettant en œuvre les rôles, les vues, les fonctions et les triggers.
 Le dossier 'site' contient un exemple de pages PHP permettant l'interaction avec la base de données.
 
-Un exemple minimal de cahier des charges et de réponse au besoin associé est disponible [ici](./CDC.md)
+Un exemple minimal de cahier des charges et de réponse au besoin associé est disponible [ici](./CDC.md).
+
+**Update 2022** : 
+- Images docker : postgres:15.0, php:8.1.12-apache, dpage/pgadmin4:6.15
 
 Lancement de l'application avec Docker
 ---------------

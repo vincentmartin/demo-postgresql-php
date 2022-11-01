@@ -1,4 +1,4 @@
-FROM php:8.0-apache
+FROM php:8.1.12-apache
 
 RUN apt-get update
 RUN apt-get install --no-install-recommends -y libpq-dev
