@@ -86,6 +86,8 @@ INSERT INTO COURSE_TEACHER VALUES('I63', 'jean.dupont@example.com');
 
 INSERT INTO COURSE_STUDENT VALUES('I63', 'kevin.durant@example.com');
 INSERT INTO COURSE_STUDENT VALUES('I51', 'kevin.durant@example.com');
+INSERT INTO COURSE_STUDENT VALUES('I63', 'jean.dupont@example.com');
+
 
 
 -----------------------------------------------------------------------------
