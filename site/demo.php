@@ -53,12 +53,38 @@
 	echo "<br/>";
 
 	// tableaux associatifs
-	$dico = ["nom" => "toto", "prenom" => "tata"];
+	$dico = ["1" => ["nom" => "toto", "prenom" => "tata", "attributs" => ["1", "2"]]];
 	foreach ($dico as $key => $value) {
 		echo "$key => $value </br>";
 	}
-	
 ?>
+<table border="1">
+<?php
+	$dico = ["1" => ["nom" => "toto", "prenom" => "tata", "attributs" => ["1", "2"]], 
+	"2" => ["nom" => "toto", "prenom" => "tata", "attributs" => ["1", "2"]]];
+	foreach($dico as $key => $sub_dic) {
+		$id_card = $key;
+		echo "<tr><th>".htmlspecialchars($id_card)."</th></tr>";
+
+		?>
+		<table border="1">
+
+		<?php
+
+		foreach($sub_dic as $sub_key => $sub_value) {
+		if ($sub_key == "attributs") {
+			$sub_value = implode(",", $sub_value); 
+		}
+		echo "<tr><th>".htmlspecialchars($sub_key)."</th></tr>";
+		echo "</th><td>".htmlspecialchars($sub_value)."</th></tr>";
+		
+		echo "</table>";
+
+	}
+	}
+
+?>
+</table>
 
 </body>
 </html>
