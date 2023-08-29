@@ -149,3 +149,29 @@ CREATE TRIGGER COURSE_DETAILS_TRIGGER
       COURSE_DETAILS FOR EACH ROW EXECUTE PROCEDURE COURSE_DETAILS_UPDATE();
 
 -- Exercices : connectez-vous avec les trois utilisateurs et constater par vous-même les droits de chacun.
+
+---
+Quelques exemple de fonctionfonctions
+---
+
+-- Fonction SQL comptant le nombre d'étudiant dans une matière
+CREATE OR REPLACE FUNCTION nbetudiants(IN varchar, OUT "nb_etudiants" integer)
+AS $$
+	SELECT count(*) FROM course_student
+	WHERE code=$1 ;
+$$ LANGUAGE SQL RETURNS NULL ON NULL INPUT ;
+
+select * from nbetudiant('I51');
+
+-- Fonction PLPGSQL affichant les noms des étudiants pour un cours donné
+CREATE OR REPLACE FUNCTION liste_etudiant_cours(code_course varchar)
+RETURNS SETOF PERSON
+AS $$
+BEGIN
+   RETURN QUERY
+	SELECT PERSON.* FROM PERSON JOIN COURSE_STUDENT 
+      ON PERSON.email = COURSE_STUDENT.student
+	WHERE code = code_course ;
+END;
+$$ 
+LANGUAGE PLPGSQL ;
