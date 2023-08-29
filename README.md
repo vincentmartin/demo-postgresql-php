@@ -9,8 +9,8 @@ Le dossier 'site' contient un exemple de pages PHP permettant l'interaction avec
 
 Un exemple minimal de cahier des charges et de réponse au besoin associé est disponible [ici](./CDC.md).
 
-**Update 2022** : 
-- Images docker : postgres:15.0, php:8.1.12-apache, dpage/pgadmin4:6.15
+**Update 2023** : 
+- Images docker : postgres:15.4, php:8.2.9-apache, dpage/pgadmin4:7.6
 
 Lancement de l'application avec Docker
 ---------------
