@@ -154,24 +154,28 @@ CREATE TRIGGER COURSE_DETAILS_TRIGGER
 Quelques exemple de fonctionfonctions
 ---
 
--- Fonction SQL comptant le nombre d'étudiant dans une matière
-CREATE OR REPLACE FUNCTION nbetudiants(IN varchar, OUT "nb_etudiants" integer)
+-- Fonction SQL comptant le nombre de matières
+CREATE OR REPLACE FUNCTION nb_courses(OUT "nb_courses" integer)
 AS $$
-	SELECT count(*) FROM course_student
-	WHERE code=$1 ;
-$$ LANGUAGE SQL RETURNS NULL ON NULL INPUT ;
+BEGIN
+	SELECT count(*) INTO nb_courses FROM course;
+END;
+$$ 
+LANGUAGE PLPGSQL ;
 
-select * from nbetudiant('I51');
+select * from nb_courses();
 
--- Fonction PLPGSQL affichant les noms des étudiants pour un cours donné
-CREATE OR REPLACE FUNCTION liste_etudiant_cours(code_course varchar)
+-- Fonction PLPGSQL affichant les noms des enseignants pour un cours donné
+CREATE OR REPLACE FUNCTION list_teachers_by_course(code_course varchar)
 RETURNS SETOF PERSON
 AS $$
 BEGIN
    RETURN QUERY
-	SELECT PERSON.* FROM PERSON JOIN COURSE_STUDENT 
-      ON PERSON.email = COURSE_STUDENT.student
+	SELECT PERSON.* FROM PERSON JOIN COURSE_TEACHER
+      ON PERSON.email = COURSE_TEACHER.teacher
 	WHERE code = code_course ;
 END;
 $$ 
 LANGUAGE PLPGSQL ;
+
+select * from list_teachers_by_course('I63');
