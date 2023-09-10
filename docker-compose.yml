@@ -11,7 +11,7 @@ services:
             - db:postgres
 
     db:
-        image: postgres:15.4
+        image: postgres:15.4-bullseye
         volumes:
             - ./docker/data/postgres/logs:/var/log/postgresql
             - ./docker/data/postgres/data:/var/lib/postgresql/data
