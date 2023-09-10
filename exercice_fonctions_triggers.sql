@@ -2,98 +2,49 @@
 -- Quelques exemples de fonctions et déclencheurs. Corrections des exercices vus en cours.
 ---
 
+------------------------------------------------------------------------------------
 -- EXERCICE 1. Fonction PLPGSQL comptant le nombre d'étudiants dans une matière
-CREATE OR REPLACE FUNCTION nbetudiants(code_course varchar)
-RETURNS table (total bigint)
-AS $$
-BEGIN
-   RETURN QUERY
-	SELECT count(*) FROM course_student
-	WHERE code=$1 ;
-END;
-$$ LANGUAGE PLPGSQL;
+------------------------------------------------------------------------------------
 
+-- TODO : écrire le code de la fonction
+------------------------------------------------------------------------------------
 
+------------------------------------------------------------------------------------
 -- EXERCICE 2. Fonction PLPGSQL affichant les noms des étudiants pour un cours donné
-CREATE OR REPLACE FUNCTION liste_etudiant_cours(code_course varchar)
-RETURNS SETOF PERSON
-AS $$
-BEGIN
-   RETURN QUERY
-	SELECT PERSON.* FROM PERSON JOIN COURSE_STUDENT 
-      ON PERSON.email = COURSE_STUDENT.student
-	WHERE code = code_course ;
-END;
-$$ 
-LANGUAGE PLPGSQL ;
+------------------------------------------------------------------------------------
 
+-- TODO : écrire le code de la fonction
+
+------------------------------------------------------------------------------------
+
+------------------------------------------------------------------------------------
 -- EXERCICE 3. Trigger qui vérifie qu'un étudiant n'est pas un enseignant et vice versa
+------------------------------------------------------------------------------------
+
 -- Création en 3 étapes
 
--- ETAPE 1. Création de fonctions qui vérifient qu'une personne n'est pas un enseignant et vice-versa
-create or replace function verif_etudiant_non_enseignant(email_person varchar)
-returns  bool as $$
-BEGIN
-RETURN NOT EXISTS 
-(
-   select teacher as email from course_teacher where teacher = email_person
-);
-END;
-$$
-LANGUAGE PLPGSQL;
+-- ETAPE 1. Création de 2 fonctions : une qui vérifie qu'une personne n'est pas un enseignant et une autre qui 
+-- vérifie qu'un enseignant n'est pas un étudiant
 
-create or replace function verif_enseignant_non_etudiant(email_person varchar)
-returns  bool as $$
-BEGIN
-RETURN NOT EXISTS 
-(
-   select student as email from course_student where student = email_person
-);
-END;
-$$
-LANGUAGE PLPGSQL;
+-- TODO : ecrire de code de la première fonction
 
--- ETAPE 2. Création de fonctions trigger qui lèvent une exception si un étudiant est déjà un enseignant et vice-versa
-create or replace function verif_enseignant_non_etudiant()
-RETURNS "trigger" as $$
-BEGIN
-   IF (verif_enseignant_non_etudiant(NEW.teacher) = false) THEN
-      RAISE EXCEPTION 'L enseignant est déjà étudiant !';
-   ELSE
-      RETURN NEW;
-   END IF;
-END;
-$$
-LANGUAGE PLPGSQL;
+-- TODO : écrire le code de la seconde fonction
 
 
-create or replace function verif_etudiant_non_enseignant()
-RETURNS "trigger" as $$
-BEGIN
-   IF (verif_etudiant_non_enseignant(NEW.student) = false) THEN
-      RAISE EXCEPTION 'L étudiant est déjà enseignant !';
-   ELSE
-      RETURN NEW;
-   END IF;
-END;
-$$
-LANGUAGE PLPGSQL;
+-- ETAPE 2. Création des 2 triggers associés
+
+-- TODO : écrire le code de la première fonction trigger associée à la première fonction
+
+-- TODO  écrire le code de la seconde fonction trigger  associée à la seconde fonction
 
 -- ETAPE 3.. Création de triggers sur les tables COURSE_TEACHER et COURSE_STUDENT
-create trigger verif_non_etudiant_trigger
-before insert 
-on course_teacher
-for each  row
-execute procedure verif_enseignant_non_etudiant();
 
-create trigger verif_non_enseignant_trigger
-before insert 
-on course_student
-for each  row
-execute procedure verif_etudiant_non_enseignant();
+-- TODO : écrire le trigger sur la table course_teacher
 
+-- TODO : écrire le trigger sur la table course_student
+------------------------------------------------------------------------------------
 
--- TEST
+-- TEST : exécuter les lignes suivante pour vérifier le bon fonctionnement de vos triggers.
 INSERT INTO PERSON VALUES ('joseph.martin@example.com', 'Joseph', 'Martin'); 
 INSERT INTO PERSON VALUES ('maryline.turin@example.com', 'Maryline', 'Turin');
 INSERT INTO PERSON VALUES ('clemence.dupin@example.com', 'Clémence', 'Dupin');
