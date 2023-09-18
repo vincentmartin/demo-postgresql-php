@@ -28,7 +28,7 @@ error_reporting(E_ALL);
     // On appelle la méthode statique get() de la classe DB qui renvoie une instance du PDO.
     $request = DB::get()->query('select * from course');
     ?>
-  // ...
+
 
 <h1 class="mb-4">Liste des cours disponibles</h1>
 <table class="table table-bordered">

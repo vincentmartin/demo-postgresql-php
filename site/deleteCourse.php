@@ -8,6 +8,11 @@ if(isset($_POST['course_id'])) {
     $course_id = $_POST['course_id'];
 
     try {
+        // D'abord, supprimez les références dans la table COURSE_TEACHER
+        $stmt = DB::get()->prepare('DELETE FROM COURSE_TEACHER WHERE code = :course_id');
+        $stmt->bindParam(':course_id', $course_id);
+        $stmt->execute();
+
         // Préparez et exécutez la requête de suppression.
         $stmt = DB::get()->prepare('DELETE FROM course WHERE code = :course_id');
         $stmt->bindParam(':course_id', $course_id);
